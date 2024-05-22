@@ -48,5 +48,11 @@
         <Button x:Name="btn2" Content="Изменить пароль" Grid.Row="10" Grid.Column="2" Margin="110,5,0,10" Click="СhangePass"/>
         <Button Content="Закрыть" Grid.Row="10" Margin="0,5,60,10" Click="CloseClick" IsCancel="True"/>
         <Button x:Name="btn3" Content="Создать" Grid.Row="10" Grid.Column="2" Margin="110,5,0,10" Visibility="Hidden" IsDefault="True" Click="CreateAccount"/>
+        <Label x:Name="LblRole" Content="Роль" Grid.Row="7" Visibility="Hidden"/>
+        <ComboBox x:Name="RoleBox" Grid.Row="7" Grid.Column="1" Margin="0,5,0,5" SelectedIndex="2" Visibility="Hidden">
+            <Label Content="Администратор"/>
+            <Label Content="Менеджер"/>
+            <Label Content="Клиент"/>
+        </ComboBox>
     </Grid>
 </Window>

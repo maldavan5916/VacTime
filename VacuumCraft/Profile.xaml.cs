@@ -54,6 +54,27 @@ namespace VacuumCraft
             OldPass.Visibility = Visibility.Hidden;
 
             btn3.Visibility = Visibility.Visible;
+            Title = "Создание аккаунта";
+        }
+
+        public Profile(string str)
+        {
+            InitializeComponent();
+            ValidTextBoxes[3] = true;
+            ValidTextBoxes[4] = true;
+            ValidTextBoxes[5] = true;
+
+            btn1.Visibility = Visibility.Hidden;
+            btn2.Visibility = Visibility.Hidden;
+            lbl1.Visibility = Visibility.Hidden;
+            lbl2.Content = "Пароль:";
+            OldPass.Visibility = Visibility.Hidden;
+
+            btn3.Visibility = Visibility.Visible;
+            btn3.Content = "Добавить";
+            LblRole.Visibility = Visibility.Visible;
+            RoleBox.Visibility = Visibility.Visible;
+            Title = "Добавление пользователя";
         }
 
         private void NameBox_TextChanged(object sender, RoutedEventArgs e)
@@ -244,7 +265,7 @@ namespace VacuumCraft
                 using (SqlCommand command = new SqlCommand(queryUser, connection))
                 {
                     command.Parameters.AddWithValue("@Name", ProfileNameBox.Text);
-                    command.Parameters.AddWithValue("@Roles_id", 3);
+                    command.Parameters.AddWithValue("@Roles_id", RoleBox.SelectedIndex + 1);
                     command.Parameters.AddWithValue("@Pass", NewPass1.Password);
                     command.Parameters.AddWithValue("@Clients_id", newClientId);
 

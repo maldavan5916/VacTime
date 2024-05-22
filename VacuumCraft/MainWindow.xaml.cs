@@ -17,13 +17,14 @@ namespace VacuumCraft
     {
         private readonly int UserID;
         private readonly int ClientId;
+        private readonly int RoleID;
 
         public MainWindow(int UserID)
         {
             InitializeComponent();
 
             string sqlQuery = "SELECT id, name, description, photoPath, price FROM VacuumInstallations";
-            string sqlQueryClient = $"SELECT Clients_id FROM Users WHERE id = {UserID}";
+            string sqlQueryClient = "SELECT Clients_id, Roles_id FROM Users WHERE id = @UserID";
             this.UserID = UserID;
 
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.VacTimeDBConnectionString))
@@ -37,21 +38,39 @@ namespace VacuumCraft
                 foreach (DataRow row in dataSet.Tables["VacuumInstallations"].Rows)
                 {
                     string photoPath = row["photoPath"].ToString();
-
-                    if (Regex.IsMatch(photoPath, @"^[a-zA-Z]:[\\/].*$"))
-                        row["image"] = photoPath;
-                    else
-                        row["image"] = Directory.GetCurrentDirectory() + photoPath;
+                    row["image"] = Regex.IsMatch(photoPath, @"^[a-zA-Z]:[\\/].*$")
+                        ? photoPath
+                        : Directory.GetCurrentDirectory() + photoPath;
                 }
 
                 listView1.ItemsSource = dataSet.Tables["VacuumInstallations"].DefaultView;
 
                 connection.Open();
-                SqlCommand command = new SqlCommand(sqlQueryClient, connection);
-                object result = command.ExecuteScalar();
 
-                if (result != null)
-                    ClientId = Convert.ToInt32(result);
+                using (SqlCommand command = new SqlCommand(sqlQueryClient, connection))
+                {
+                    command.Parameters.AddWithValue("@UserID", UserID);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            ClientId = reader.GetInt32(0);
+                            RoleID = reader.GetInt32(1);
+                        }
+                    }
+                }
+            }
+
+            switch (RoleID)
+            {
+                case 2: { 
+                        AddUser.Visibility = Visibility.Collapsed; 
+                    } break;
+                case 3: {
+                        ReportsMenu.Visibility = Visibility.Collapsed;
+                        AddMenu.Visibility = Visibility.Collapsed;
+                    } break;
             }
         }
 
@@ -77,6 +96,19 @@ namespace VacuumCraft
         {
             new LoginWindow().Show();
             Close();
+        }
+
+        private void HideButton_loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && RoleID == 3)
+            {
+               btn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void AddUser_Click(object sender, RoutedEventArgs e)
+        {
+            new Profile("Admin").ShowDialog();
         }
     }
 
