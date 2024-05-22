@@ -1,0 +1,70 @@
+﻿<Window x:Name="window" x:Class="VacuumCraft.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VacuumCraft"
+        mc:Ignorable="d"
+        Title="Каталог" Height="450" Width="800" MinHeight="450" MinWidth="800">
+    <Window.Resources>
+        <local:WidthConverter x:Key="WidthConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White"/>
+                <GradientStop Color="#FF656464" Offset="0.622"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Профиль">
+                <MenuItem Header="Управление" Click="OpenProfile"/>
+                <MenuItem Header="Выход" Click="Logout"/>
+            </MenuItem>
+            <MenuItem x:Name="AddMenu" Header="Добавить">
+                <MenuItem Header="Пользователя"/>
+                <MenuItem Header="Установку"/>
+            </MenuItem>
+            <MenuItem x:Name="ReportsMenu" Header="Отчёты">
+                <MenuItem Header="Отчет о списках заявок"/>
+                <MenuItem Header="Отчет о клиентах"/>
+            </MenuItem>
+            <MenuItem Header="Настройка">
+                <MenuItem Header="Параметры"/>
+            </MenuItem>
+            <MenuItem Header="Сервис">
+                <MenuItem Header="О прогрмме" Click="AbotProgram"/>
+                <MenuItem Header="Руководство пользователя"/>
+            </MenuItem>
+        </Menu>
+        <ListView x:Name="listView1" Margin="10,30,10,10" ScrollViewer.CanContentScroll="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="grid" Height="200" Width="{Binding ActualWidth, ElementName=listView1, Converter={StaticResource WidthConverter}, ConverterParameter=-40, Mode=OneWay}" Margin="0,0,0,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30*"/>
+                            <RowDefinition Height="30*"/>
+                            <RowDefinition Height="140*"/>
+                            <RowDefinition Height="35*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="100*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding Path=image}" Grid.RowSpan="4"/>
+                        <TextBlock Text="{Binding Path=name}" FontWeight="Bold" Grid.Column="1"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                            <TextBlock Text="Цена: "/>
+                            <TextBlock Text="{Binding Path=price}"/>
+                            <TextBlock Text=" BYN"/>
+                        </StackPanel>
+                        <TextBlock Text="{Binding Path=description}" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
+                        <Button Uid="{Binding Path=id}" Content="Подать заявку" Click="VacuumInstallationsClick" Grid.Row="3" Grid.Column="1" Width="150" HorizontalAlignment="Left"/>
+                        <Button x:Name="ChangeBtn" Uid="{Binding Path=id}" Content="Изменить" Grid.Row="3" Grid.Column="1" Width="70" HorizontalAlignment="Right" Margin="0,0,70,0"/>
+                        <Button x:Name="DeleteBtn" Uid="{Binding Path=id}" Content="Удалить" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Width="60"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>

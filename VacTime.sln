@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacuumCraft", "VacuumCraft\VacuumCraft.csproj", "{84CB26C5-C375-4EC1-9CE3-EF12F64B7AA4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84CB26C5-C375-4EC1-9CE3-EF12F64B7AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84CB26C5-C375-4EC1-9CE3-EF12F64B7AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84CB26C5-C375-4EC1-9CE3-EF12F64B7AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84CB26C5-C375-4EC1-9CE3-EF12F64B7AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E965F35-232E-4070-9031-323045F79C49}
+	EndGlobalSection
+EndGlobal

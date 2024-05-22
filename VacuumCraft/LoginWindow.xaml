@@ -1,0 +1,26 @@
+﻿<Window x:Class="VacuumCraft.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VacuumCraft"
+        mc:Ignorable="d"
+        Title="Вход" Height="450" Width="700" MinHeight="350" MinWidth="600">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF8A8A8A" Offset="1"/>
+                <GradientStop Color="#FFFFFFFF" Offset="0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Content="Вход в аккаунт" FontSize="24" HorizontalAlignment="Center" Margin="0,60,0,0" Height="43" VerticalAlignment="Top" FontFamily="Corbel" FontWeight="Bold"/>
+        <Grid VerticalAlignment="Center" Margin="200,0,200,0" Height="105">
+            <Label Content="Логин" Width="60" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox x:Name="LoginBox" Margin="65,2,0,0" Height="26" VerticalAlignment="Top"/>
+            <Label Content="Пароль" Margin="0,35,0,0" Width="60" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <PasswordBox x:Name="PasswordBox" Margin="65,38,0,0" Height="24" VerticalAlignment="Top"/>
+            <Button Content="Вход" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="100" Height="30" IsDefault="True" Click="Auth"/>
+        </Grid>
+        <Button Content="Создать аккаунт" Background="{x:Null}" Width="150" Height="25" BorderBrush="{x:Null}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="CreateAkk"/>
+    </Grid>
+</Window>

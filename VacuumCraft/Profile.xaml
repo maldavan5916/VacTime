@@ -1,0 +1,52 @@
+﻿<Window x:Class="VacuumCraft.Profile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VacuumCraft"
+        mc:Ignorable="d"
+        Title="Профиль" Height="380" Width="635" MinHeight="380" MinWidth="635">
+    <Grid Margin="10,10,10,6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Имя профиля:" Grid.Row="0"/>
+        <Label Content="Имя клиента:" Grid.Row="1"/>
+        <Label Content="Номер телефона:" Grid.Row="2"/>
+        <Label Content="Email:" Grid.Row="3"/>
+        <Label Content="УНП:" Grid.Row="4"/>
+        <Label Content="юр. Адрес:" Grid.Row="5"/>
+        <Label Content="Банковский счёт:" Grid.Row="6"/>
+        <Label x:Name="lbl1" Content="Старый пароль:" Grid.Row="8"/>
+        <Label x:Name="lbl2" Content="Новый пароль:" Grid.Row="9"/>
+        <TextBox x:Name="ProfileNameBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Margin="0,5,0,4" Grid.ColumnSpan="2" TextChanged="ProfileNameBox_TextChanged"/>
+        <TextBox x:Name="ClientNameBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Margin="0,5,0,4" Grid.ColumnSpan="2" TextChanged="NameBox_TextChanged"/>
+        <TextBox x:Name="PhoneNomberBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="2" Margin="0,5,0,4" Grid.ColumnSpan="2" TextChanged="PhoneBox_TextChanged"/>
+        <TextBox x:Name="EmailBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="3" Margin="0,5,0,4" Grid.ColumnSpan="2" TextChanged="EmailBox_TextChanged"/>
+        <TextBox x:Name="UnpBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="4" Margin="0,5,0,4" Grid.ColumnSpan="2" TextChanged="UnpBox_TextChanged"/>
+        <TextBox x:Name="UrAdressBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="5" Margin="0,5,0,4" Grid.ColumnSpan="2" TextChanged="UrAdressBox_TextChanged"/>
+        <TextBox x:Name="BankAccountBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="6" Margin="0,5,0,4" Grid.ColumnSpan="2" TextChanged="BankAccountBox_TextChanged"/>
+        <Button x:Name="btn1" Content="Сохранить" Grid.Row="7" Grid.Column="2" Margin="140,5,0,10" Click="SaveClick"/>
+        <PasswordBox x:Name="OldPass" Grid.Column="1" Grid.Row="8" Margin="0,5,5,4"/>
+        <PasswordBox x:Name="NewPass1" Grid.Column="1" Grid.Row="9" Margin="0,5,5,4" PasswordChanged="NewPass1_PasswordChanged"/>
+        <PasswordBox x:Name="NewPass2" Grid.Column="2" Grid.Row="9" Margin="5,5,0,4" PasswordChanged="NewPass2_PasswordChanged"/>
+        <Button x:Name="btn2" Content="Изменить пароль" Grid.Row="10" Grid.Column="2" Margin="110,5,0,10" Click="СhangePass"/>
+        <Button Content="Закрыть" Grid.Row="10" Margin="0,5,60,10" Click="CloseClick" IsCancel="True"/>
+        <Button x:Name="btn3" Content="Создать" Grid.Row="10" Grid.Column="2" Margin="110,5,0,10" Visibility="Hidden" IsDefault="True" Click="CreateAccount"/>
+    </Grid>
+</Window>
