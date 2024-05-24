@@ -95,6 +95,9 @@
       <DependentUpon>VacTimeDBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="VacuumInstallations.cs" />
+    <Compile Include="VacuumInstallationsWindow.xaml.cs">
+      <DependentUpon>VacuumInstallationsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VacuumOrder.xaml.cs">
       <DependentUpon>VacuumOrder.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VacuumInstallationsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,6 +195,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FilePIckerIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,31 +23,15 @@ namespace VacuumCraft
         {
             InitializeComponent();
 
-            string sqlQuery = "SELECT id, name, description, photoPath, price FROM VacuumInstallations";
-            string sqlQueryClient = "SELECT Clients_id, Roles_id FROM Users WHERE id = @UserID";
+            string sqlQuery = "SELECT Clients_id, Roles_id FROM Users WHERE id = @UserID";
             this.UserID = UserID;
 
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.VacTimeDBConnectionString))
             {
-                SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, connection);
-                DataSet dataSet = new DataSet();
-
-                adapter.Fill(dataSet, "VacuumInstallations");
-                dataSet.Tables["VacuumInstallations"].Columns.Add("image");
-
-                foreach (DataRow row in dataSet.Tables["VacuumInstallations"].Rows)
-                {
-                    string photoPath = row["photoPath"].ToString();
-                    row["image"] = Regex.IsMatch(photoPath, @"^[a-zA-Z]:[\\/].*$")
-                        ? photoPath
-                        : Directory.GetCurrentDirectory() + photoPath;
-                }
-
-                listView1.ItemsSource = dataSet.Tables["VacuumInstallations"].DefaultView;
-
+                UpdatelistViewData();
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand(sqlQueryClient, connection))
+                using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                 {
                     command.Parameters.AddWithValue("@UserID", UserID);
 
@@ -64,13 +48,40 @@ namespace VacuumCraft
 
             switch (RoleID)
             {
-                case 2: { 
-                        AddUser.Visibility = Visibility.Collapsed; 
-                    } break;
-                case 3: {
+                case 2:
+                    {
+                        AddUser.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 3:
+                    {
                         ReportsMenu.Visibility = Visibility.Collapsed;
                         AddMenu.Visibility = Visibility.Collapsed;
-                    } break;
+                    }
+                    break;
+            }
+        }
+
+        private void UpdatelistViewData()
+        {
+            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.VacTimeDBConnectionString))
+            {
+                string sqlQuery = "SELECT id, name, description, photoPath, price FROM VacuumInstallations WHERE Visibility = 1";
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, connection);
+                DataSet dataSet = new DataSet();
+
+                adapter.Fill(dataSet, "VacuumInstallations");
+                dataSet.Tables["VacuumInstallations"].Columns.Add("image");
+
+                foreach (DataRow row in dataSet.Tables["VacuumInstallations"].Rows)
+                {
+                    string photoPath = row["photoPath"].ToString();
+                    row["image"] = Regex.IsMatch(photoPath, @"^[a-zA-Z]:[\\/].*$")
+                        ? photoPath
+                        : Directory.GetCurrentDirectory() + photoPath;
+                }
+
+                listView1.ItemsSource = dataSet.Tables["VacuumInstallations"].DefaultView;
             }
         }
 
@@ -102,13 +113,68 @@ namespace VacuumCraft
         {
             if (sender is Button btn && RoleID == 3)
             {
-               btn.Visibility = Visibility.Collapsed;
+                btn.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void UpdateCatalog_Click(object sender, RoutedEventArgs e)
+        {
+            UpdatelistViewData();
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
             new Profile("Admin").ShowDialog();
+        }
+
+        private void InstallationsWindow_Closed(object sender, EventArgs e)
+        {
+            UpdatelistViewData();
+        }
+
+        private void VacuumInstallations_Click(object sender, RoutedEventArgs e)
+        {
+            VacuumInstallationsWindow installationsWindow = new VacuumInstallationsWindow();
+            installationsWindow.Closed += InstallationsWindow_Closed;
+            installationsWindow.ShowDialog();
+        }
+
+        private void VacuumInstallations_Change(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                VacuumInstallationsWindow installationsWindow = new VacuumInstallationsWindow(Convert.ToInt32(button.Uid));
+                installationsWindow.Closed += InstallationsWindow_Closed;
+                installationsWindow.ShowDialog();
+            }
+        }
+
+        private void VacuumInstallations_Delete(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                int vacuumInstallationsid = Convert.ToInt32(button.Uid);
+
+                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.VacTimeDBConnectionString))
+                {
+                    string deleteQuery = "UPDATE VacuumInstallations SET visibility = 0 WHERE id = @VacuumInstallationsId";
+                    VacuumInstallations vacuumInstallations = new VacuumInstallations(vacuumInstallationsid);
+
+                    MessageBoxResult result = MessageBox.Show($"Вы действительно хотите удалить установку\n{vacuumInstallations.Name}", "Удаление", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.No)
+                    {
+                        return;
+                    }
+
+                    using (SqlCommand command = new SqlCommand(deleteQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@VacuumInstallationsId", vacuumInstallationsid);
+                        connection.Open();
+                        int rowsAffected = command.ExecuteNonQuery();
+                    }
+                }
+                UpdatelistViewData();
+            }
         }
     }
 

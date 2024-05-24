@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -7,7 +8,7 @@ namespace VacuumCraft
 {
     internal class Validation
     {
-        public static bool ClientName(object sender)
+        public static bool Name(object sender)
         {
             if (sender is TextBox textbox)
             {
@@ -141,6 +142,94 @@ namespace VacuumCraft
                 {
                     textbox.Background = new SolidColorBrush(Properties.Settings.Default.NoValidColor);
                     textbox.ToolTip = "Только из букв латинского алфавита и цифр, не содержит пробелов и не превышает 45 символов";
+                    return false;
+                }
+                else
+                {
+                    textbox.ToolTip = null;
+                    textbox.Background = null;
+                    return true;
+                }
+            }
+            else
+                throw new FormatException("is not textbox");
+        }
+
+        public static bool Path(object sender, bool IsFile)
+        {
+            if (sender is TextBox textbox)
+            {
+                if (IsFile)
+                {
+                    if (!File.Exists(textbox.Text)) 
+                    {
+                        textbox.Background = new SolidColorBrush(Properties.Settings.Default.NoValidColor);
+                        textbox.ToolTip = "Файл не сушествует на данном ПК";
+                        return false;
+                    }
+                    else
+                    {
+                        textbox.ToolTip = null;
+                        textbox.Background = null;
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (!Directory.Exists(textbox.Text)) 
+                    {
+                        textbox.Background = new SolidColorBrush(Properties.Settings.Default.NoValidColor);
+                        textbox.ToolTip = "Директория не сушествует на данном ПК";
+                        return false;
+                    }
+                    else
+                    {
+                        textbox.ToolTip = null;
+                        textbox.Background = null;
+                        return true;
+                    }
+                }
+
+            }
+            else
+                throw new FormatException("is not textbox");
+        }
+
+        public static bool Price(object sender)
+        {
+            if (sender is TextBox textbox)
+            {
+                if (string.IsNullOrWhiteSpace(textbox.Text))
+                {
+                    textbox.Background = new SolidColorBrush(Properties.Settings.Default.NoValidColor);
+                    textbox.ToolTip = "Не может быть пустым";
+                    return false;
+                }
+                if (!Regex.IsMatch(textbox.Text, @"^\d{1,8}(\.\d{1,2})?$"))
+                {
+                    textbox.Background = new SolidColorBrush(Properties.Settings.Default.NoValidColor);
+                    textbox.ToolTip = "Допустимы числа с не более чем двумя знаками после запятой.\nЦелая часть должна содержать от 1 до 8 цифр.";
+                    return false;
+                }
+                else
+                {
+                    textbox.ToolTip = null;
+                    textbox.Background = null;
+                    return true;
+                }
+            }
+            else
+                throw new FormatException("is not textbox");
+        }
+
+        public static bool Description(object sender)
+        {
+            if (sender is TextBox textbox)
+            {
+                if (string.IsNullOrWhiteSpace(textbox.Text))
+                {
+                    textbox.Background = new SolidColorBrush(Properties.Settings.Default.NoValidColor);
+                    textbox.ToolTip = "Строка пуста, null или состоит только из пробельных символов.";
                     return false;
                 }
                 else

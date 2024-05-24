@@ -29,9 +29,10 @@ CREATE TABLE Clients (
 CREATE TABLE VacuumInstallations (
   id INT NOT NULL IDENTITY(1,1),
   name NVARCHAR(45) NOT NULL,
-  description NVARCHAR(255) NOT NULL,
+  description NVARCHAR(MAX) NOT NULL,
   photoPath NVARCHAR(128) NULL,
   price DECIMAL(10,2) NOT NULL,
+  visibility BIT NOT NULL DEFAULT 1,
   PRIMARY KEY (id)
 );
 

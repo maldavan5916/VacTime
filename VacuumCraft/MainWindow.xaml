@@ -23,16 +23,18 @@
             </MenuItem>
             <MenuItem x:Name="AddMenu" Header="Добавить">
                 <MenuItem x:Name="AddUser" Header="Пользователя" Click="AddUser_Click"/>
-                <MenuItem Header="Установку"/>
+                <MenuItem Header="Установку" Click="VacuumInstallations_Click"/>
             </MenuItem>
             <MenuItem x:Name="ReportsMenu" Header="Отчёты">
                 <MenuItem Header="Отчет о списках заявок"/>
                 <MenuItem Header="Отчет о клиентах"/>
+                <Separator/>
+                <MenuItem Header="Печать договора"/>
             </MenuItem>
-            <MenuItem Header="Сервис">
+            <MenuItem Header="Справка">
                 <MenuItem Header="О прогрмме" Click="AbotProgram"/>
-                <MenuItem Header="Руководство пользователя"/>
             </MenuItem>
+            <MenuItem Header="Обновить" Click="UpdateCatalog_Click"/>
         </Menu>
         <ListView x:Name="listView1" Margin="10,30,10,10" ScrollViewer.CanContentScroll="False">
             <ListView.ItemTemplate>
@@ -57,8 +59,8 @@
                         </StackPanel>
                         <TextBlock Text="{Binding Path=description}" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
                         <Button Uid="{Binding Path=id}" Content="Подать заявку" Click="VacuumInstallationsClick" Grid.Row="3" Grid.Column="1" Width="150" HorizontalAlignment="Left"/>
-                        <Button Uid="{Binding Path=id}" Content="Изменить" Grid.Row="3" Grid.Column="1" Width="70" HorizontalAlignment="Right" Margin="0,0,70,0" Loaded="HideButton_loaded"/>
-                        <Button Uid="{Binding Path=id}" Content="Удалить" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Width="60" Loaded="HideButton_loaded"/>
+                        <Button Uid="{Binding Path=id}" Content="Изменить" Grid.Row="3" Grid.Column="1" Width="70" HorizontalAlignment="Right" Margin="0,0,70,0" Loaded="HideButton_loaded" Click="VacuumInstallations_Change"/>
+                        <Button Uid="{Binding Path=id}" Content="Удалить" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Width="60" Loaded="HideButton_loaded" Click="VacuumInstallations_Delete"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -79,7 +79,7 @@ namespace VacuumCraft
 
         private void NameBox_TextChanged(object sender, RoutedEventArgs e)
         {
-            ValidTextBoxes[0] = Validation.ClientName(sender);
+            ValidTextBoxes[0] = Validation.Name(sender);
         }
 
         private void PhoneBox_TextChanged(object sender, RoutedEventArgs e)

@@ -43,7 +43,7 @@
         <TextBox x:Name="ClientUrAdressBox" TextWrapping="Wrap" FontSize="14" Grid.Column="2" Grid.Row="7" Margin="0,5,10,5" TextChanged ="ClientUrAdressBox_TextChanged"/>
         <Label Content="Банковский счёт: " FontSize="14" Grid.Column="1" Grid.Row="8"/>
         <TextBox x:Name="ClientBankAccountBox" TextWrapping="Wrap" FontSize="14" Grid.Column="2" Grid.Row="8" Margin="0,5,10,5" TextChanged ="ClientBankAccountBox_TextChanged"/>
-        <TextBox x:Name="VacuumDescription" Grid.Row="9" Margin="10,10,10,10" TextWrapping="Wrap"/>
+        <TextBox x:Name="VacuumDescription" Grid.Row="9" Margin="10,10,10,10" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" KeyDown="TextBox_KeyDown" Grid.ColumnSpan="2"/>
         <Button Content="Отмена" Height="25" Width="100" Grid.Row="9" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,120,10" Click="Cancel"/>
         <Button x:Name="AcceptButton" Content="Подтвердить" Height="25" Width="100" Grid.Row="9" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Click="AcceptClicl"/>
     </Grid>

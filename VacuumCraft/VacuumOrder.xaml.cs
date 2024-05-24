@@ -3,6 +3,8 @@ using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
@@ -147,7 +149,7 @@ namespace VacuumCraft
 
         private void ClientNameBox_TextChanged(object sender, RoutedEventArgs e)
         {
-            ValidTextBoxes[0] = Validation.ClientName(sender);
+            ValidTextBoxes[0] = Validation.Name(sender);
         }
 
         private void СlientPhoneBox_TextChanged(object sender, RoutedEventArgs e)
@@ -173,6 +175,24 @@ namespace VacuumCraft
         private void ClientBankAccountBox_TextChanged(object sender, RoutedEventArgs e)
         {
             ValidTextBoxes[5] = Validation.BankAccount(sender);
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // Подавляем стандартное поведение клавиши Enter
+                e.Handled = true;
+
+                // Вставляем новую строку в позицию курсора
+                var textBox = sender as TextBox;
+                if (textBox != null)
+                {
+                    int caretIndex = textBox.CaretIndex;
+                    textBox.Text = textBox.Text.Insert(caretIndex, Environment.NewLine);
+                    textBox.CaretIndex = caretIndex + Environment.NewLine.Length;
+                }
+            }
         }
 
         private void Cancel(object sender, EventArgs e)
