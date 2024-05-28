@@ -1,13 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Data.SqlClient;
 using System.Drawing.Imaging;
-using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Data.SqlClient;
 
 namespace VacuumCraft
 {
@@ -74,19 +73,37 @@ namespace VacuumCraft
             {
                 try
                 {
-                    ImageVacuum.Source = new BitmapImage(new Uri(PhotoBox.Text));
+                    ImageVacuum.Source = LoadImage(PhotoBox.Text);
                     ValidTextBoxes[3] = true;
-                    return;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    ValidTextBoxes[3] = false;
                 }
             }
-            ValidTextBoxes[3] = false;
+            else
+            {
+                new BitmapImage(new Uri("/NoImage.png", UriKind.Relative));
+                ValidTextBoxes[3] = false;
+            }
         }
 
-        private void OpenImage(object  sender, RoutedEventArgs e)
+        private BitmapImage LoadImage(string imagePath)
+        {
+            BitmapImage bitmap = new BitmapImage();
+            using (var stream = new FileStream(imagePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                bitmap.BeginInit();
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.StreamSource = stream;
+                bitmap.EndInit();
+            }
+            return bitmap;
+        }
+
+
+        private void OpenImage(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -168,8 +185,8 @@ namespace VacuumCraft
                     command.Parameters.AddWithValue("@Description", DescriptionBox.Text);
                     command.Parameters.AddWithValue("@Price", Convert.ToDouble(PriceBox.Text));
 
+                    
                     ConvertAndCopyImage(PhotoBox.Text, $"{Directory.GetCurrentDirectory()}\\VacuumCraftData\\VacuumPhoto\\{Installations.Id}.jpg");
-
                     int rowsAffected = command.ExecuteNonQuery();
                 }
             }

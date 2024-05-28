@@ -8,6 +8,7 @@
         Title="Каталог" Height="450" Width="800" MinHeight="450" MinWidth="800">
     <Window.Resources>
         <local:WidthConverter x:Key="WidthConverter"/>
+        <local:ImageConverter x:Key="ImageConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.Background>
@@ -50,7 +51,7 @@
                             <ColumnDefinition Width="50*"/>
                             <ColumnDefinition Width="100*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="{Binding Path=image}" Grid.RowSpan="4"/>
+                        <Image Source="{Binding Path=image, Converter={StaticResource ImageConverter}}" Grid.RowSpan="4"/>
                         <TextBlock Text="{Binding Path=name}" FontWeight="Bold" Grid.Column="1"/>
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
                             <TextBlock Text="Цена: "/>
