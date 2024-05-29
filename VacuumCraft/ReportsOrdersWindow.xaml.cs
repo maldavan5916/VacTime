@@ -88,22 +88,42 @@ namespace VacuumCraft
                     SqlDataReader reader = command.ExecuteReader();
 
                     var doc = DocX.Create(saveFileDialog.FileName);
-                    doc.InsertParagraph("Отчет о заявках").FontSize(20).Bold().Alignment = Alignment.center;
+
+                    doc.InsertParagraph("Отчёт о заявках")
+                        .FontSize(20)
+                        .Bold()
+                        .Alignment = Alignment.center;
+                    doc.InsertParagraph()
+                        .AppendLine($"По клиенту: {ClientComboBox.Text}")
+                        .AppendLine($"По установке: {VacuumInstallationsComboBox.Text}")
+                        .AppendLine($"За период: с {StartDP.SelectedDate:dd.MM.yyyy} по {EndDP.SelectedDate:dd.MM.yyyy}");
+
+                    var table = doc.AddTable(1, 5);
+
+                    table.Rows[0].Cells[0].Paragraphs[0].Append("Номер заказа").Bold();
+                    table.Rows[0].Cells[1].Paragraphs[0].Append("Клиент").Bold();
+                    table.Rows[0].Cells[2].Paragraphs[0].Append("Установка").Bold();
+                    table.Rows[0].Cells[3].Paragraphs[0].Append("Дата заказа").Bold();
+                    table.Rows[0].Cells[4].Paragraphs[0].Append("Документ").Bold();
+
                     while (reader.Read())
                     {
+                        var row = table.InsertRow();
                         Client client = new Client(Convert.ToInt32(reader["Clients_id"]));
                         VacuumInstallations vacuumInstallations = new VacuumInstallations(Convert.ToInt32(reader["VacuumInstallations_id"]));
 
-                        doc.InsertParagraph()
-                            .AppendLine($"Номер заказа: {reader["id"]}")
-                            .AppendLine($"Клиент: {client.Name}")
-                            .AppendLine($"Установка: {vacuumInstallations.Name}")
-                            .AppendLine($"Дата заказа: {reader["createDate"]}")
-                            .AppendLine($"Детали: {reader["pathOrder"]}")
-                            .AppendLine(new string('-', 40));
+                        row.Cells[0].Paragraphs[0].Append(reader["id"].ToString());
+                        row.Cells[1].Paragraphs[0].Append(client.Name);
+                        row.Cells[2].Paragraphs[0].Append(vacuumInstallations.Name);
+                        row.Cells[3].Paragraphs[0].Append(Convert.ToDateTime(reader["createDate"]).ToString("dd.MM.yyyy"));
+                        row.Cells[4].Paragraphs[0].Append(reader["pathOrder"].ToString());
                     }
 
                     reader.Close();
+                    doc.InsertTable(table);
+                    doc.InsertParagraph("");
+                    doc.InsertParagraph("___________________\t\t__________\t_______________");
+                    doc.InsertParagraph("      (Должность)\t\t\t   (Подпись)\t  (Расшифровка)").FontSize(9);
                     doc.Save();
                     MessageBox.Show("Отчёт создан успешно!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 }

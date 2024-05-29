@@ -28,7 +28,7 @@
             </MenuItem>
             <MenuItem x:Name="ReportsMenu" Header="Отчёты">
                 <MenuItem Header="Отчет о списках заявок" Click="ReportsOrders"/>
-                <MenuItem Header="Отчет о клиентах" Click="ReportsClients"/>
+                <MenuItem Header="Список клиентов" Click="ReportsClients"/>
                 <Separator/>
                 <MenuItem Header="Печать договора" Click="PrintAgreements"/>
             </MenuItem>
