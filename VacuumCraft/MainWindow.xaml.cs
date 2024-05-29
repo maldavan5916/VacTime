@@ -177,6 +177,21 @@ namespace VacuumCraft
                 UpdatelistViewData();
             }
         }
+
+        private void ReportsOrders(object sender, RoutedEventArgs e)
+        {
+            new ReportsOrdersWindow().ShowDialog();
+        }
+
+        private void ReportsClients(object sender, RoutedEventArgs e)
+        {
+            new ReportsClientsWindow().ShowDialog();
+        }
+
+        private void PrintAgreements(object sender, RoutedEventArgs e)
+        {
+            new PrintAgreementsWindow().ShowDialog();
+        }
     }
 
     public class WidthConverter : IValueConverter

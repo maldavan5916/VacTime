@@ -27,10 +27,10 @@
                 <MenuItem Header="Установку" Click="VacuumInstallations_Click"/>
             </MenuItem>
             <MenuItem x:Name="ReportsMenu" Header="Отчёты">
-                <MenuItem Header="Отчет о списках заявок"/>
-                <MenuItem Header="Отчет о клиентах"/>
+                <MenuItem Header="Отчет о списках заявок" Click="ReportsOrders"/>
+                <MenuItem Header="Отчет о клиентах" Click="ReportsClients"/>
                 <Separator/>
-                <MenuItem Header="Печать договора"/>
+                <MenuItem Header="Печать договора" Click="PrintAgreements"/>
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="О прогрмме" Click="AbotProgram"/>

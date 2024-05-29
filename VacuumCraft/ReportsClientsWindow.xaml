@@ -1,0 +1,22 @@
+﻿<Window x:Class="VacuumCraft.ReportsClientsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VacuumCraft"
+        mc:Ignorable="d"
+        Title="Отчёт о клиентах" Height="300" Width="200" MinHeight="270" MinWidth="250" MaxHeight="380" MaxWidth="400">
+    <Grid Margin="10,10,10,10">
+        <StackPanel>
+            <Label Content="Что должно быть в отчёте"/>
+            <CheckBox x:Name="NameCB" Content="Имя клиента" IsChecked="True"/>
+            <CheckBox x:Name="PhoneCB" Content="Номер телефона" IsChecked="True"/>
+            <CheckBox x:Name="EmailCB" Content="Email"/>
+            <CheckBox x:Name="UnpCB" Content="УНП"/>
+            <CheckBox x:Name="UrAdressCB" Content="юр. Адрес"/>
+            <CheckBox x:Name="BankAccountCB" Content="Банковский счёт"/>
+        </StackPanel>
+        <Button Content="Сделать Отчёт" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="25" Width="90" IsDefault="True" Click="CreateReportButton_Click"/>
+        <Button Content="Закрыть" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="25" Width="90" IsCancel="True"/>
+    </Grid>
+</Window>
