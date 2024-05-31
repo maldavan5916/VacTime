@@ -36,7 +36,6 @@ CREATE TABLE VacuumInstallations (
   PRIMARY KEY (id)
 );
 
-
 -- -----------------------------------------------------
 -- Table `VacTimeDB`.`Orders`
 -- -----------------------------------------------------

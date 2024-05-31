@@ -180,7 +180,7 @@ namespace VacuumCraft
 
         private void ReportsOrders(object sender, RoutedEventArgs e)
         {
-            new ReportsOrdersWindow().ShowDialog();
+            new ReportsOrdersWindow(RoleID).ShowDialog();
         }
 
         private void ReportsClients(object sender, RoutedEventArgs e)

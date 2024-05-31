@@ -13,9 +13,18 @@ namespace VacuumCraft
     /// </summary>
     public partial class ReportsOrdersWindow : Window
     {
-        public ReportsOrdersWindow()
+        private string role;
+        public ReportsOrdersWindow(int roleID)
         {
             InitializeComponent();
+            Console.WriteLine("--------------------- " + roleID);
+            
+            switch(roleID)
+            {
+                case 2: role = "Менеджер                 "; break;
+                case 1: role = "Администратор            "; break;
+                default: role = "Неизвестный              "; break;
+            }
 
             LoadClients();
             LoadVacuumInstallations();
@@ -89,7 +98,7 @@ namespace VacuumCraft
 
                     var doc = DocX.Create(saveFileDialog.FileName);
 
-                    doc.InsertParagraph("Отчёт о заявках")
+                    doc.InsertParagraph("Отчёт по заявках")
                         .FontSize(20)
                         .Bold()
                         .Alignment = Alignment.center;
@@ -121,9 +130,15 @@ namespace VacuumCraft
 
                     reader.Close();
                     doc.InsertTable(table);
+
                     doc.InsertParagraph("");
-                    doc.InsertParagraph("___________________\t\t__________\t_______________");
-                    doc.InsertParagraph("      (Должность)\t\t\t   (Подпись)\t  (Расшифровка)").FontSize(9);
+                    //doc.InsertParagraph($"{role}\t\t__________\t_______________");
+                    //doc.InsertParagraph("      (Должность)\t\t\t   (Подпись)\t  (Расшифровка)").FontSize(9);
+                    doc.InsertParagraph()
+                      .Append(role).UnderlineStyle(UnderlineStyle.singleLine).Append("\t\t\t\t\t")
+                      .Append("____________\t__________________")
+                      .AppendLine("       (Должность)\t\t\t\t\t\t     (Подпись)\t      (Расшифровка)").FontSize(9);
+                    Console.WriteLine(role);
                     doc.Save();
                     MessageBox.Show("Отчёт создан успешно!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 }

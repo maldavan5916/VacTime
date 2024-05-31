@@ -6,7 +6,70 @@
         xmlns:local="clr-namespace:VacuumCraft"
         mc:Ignorable="d"
         Title="Печать договора" Height="450" Width="800">
-    <Grid>
-        
+    <Window.Resources>
+        <local:WidthConverter x:Key="WidthConverter"/>
+    </Window.Resources>
+    <Grid Margin="10,10,10,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="175"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Top" Height="15" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="78*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Клиент" VerticalAlignment="Center"/>
+            <TextBlock Text="Установка" Grid.Column="1" VerticalAlignment="Center"/>
+            <TextBlock Text="Дата" Grid.Column="2" VerticalAlignment="Center"/>
+            <TextBlock Text="Документ" Grid.Column="3" VerticalAlignment="Center"/>
+        </Grid>
+        <ListView x:Name="listView2" SelectionChanged="listView2_SelectionChanged" Grid.ColumnSpan="3" Margin="0,15,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="grid" Height="25" Width="{Binding ActualWidth, ElementName=listView2, Converter={StaticResource WidthConverter}, ConverterParameter=-40, Mode=OneWay}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32*"/>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="25*"/>
+                            <ColumnDefinition Width="78*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=ClientName}" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=VacuumInstallationName}" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=Date}" Grid.Column="2" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=pathOrder}" Grid.Column="3" VerticalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Content="Имя клиента:" Grid.Row="1"/>
+        <Label Content="Название установки:" Grid.Row="1" Margin="0,27,0,0" Grid.RowSpan="2"/>
+        <Label Content="Дата создания заявки:" Grid.Row="2" Margin="0,27,0,0" Grid.RowSpan="2"/>
+        <Label Content="Документ:" Grid.Row="3" Margin="0,27,0,0" Grid.RowSpan="2"/>
+        <Label Content="Дата создания договора:" Grid.Row="4" Margin="0,27,0,0" Grid.RowSpan="2"/>
+        <Label Content="Цена:" Grid.Row="6"/>
+        <Label Content="Условия:" Grid.Row="1" Grid.Column="3" Margin="5,0,0,0"/>
+        <TextBox x:Name="clinetNameBox" Grid.Row="1" Grid.Column="1" Height="20" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox x:Name="installationsNameBox" Grid.Row="2" Grid.Column="1" Height="20" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox x:Name="orderCreateDateBox" Grid.Row="3" Grid.Column="1" Height="20" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox x:Name="orderPathBox" Grid.Row="4" Grid.Column="1" Height="20" VerticalAlignment="Center" IsReadOnly="True"/>
+        <DatePicker x:Name="dateConclusionDP" Grid.Row="4" Grid.Column="1" Margin="0,27,0,0" Grid.RowSpan="2"/>
+        <TextBox x:Name="priceBox" Grid.Row="6" Grid.Column="1" Height="20" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox x:Name="ConditionsBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" KeyDown="TextBox_KeyDown" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Margin="5,0,0,0"/>
+        <Button Content="Закрыть"  Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsCancel="True" Grid.Row="7"/>
+        <Button x:Name="PrintBtn" Content="Печать" Click="PrintBtn_Click" Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsDefault="True" Grid.Row="7" Grid.Column="2"/>
     </Grid>
 </Window>
