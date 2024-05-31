@@ -75,10 +75,10 @@ namespace VacuumCraft
         {
             if (sender is TextBox textbox)
             {
-                if (!Regex.IsMatch(textbox.Text, @"^$|^\d{10}$"))
+                if (!Regex.IsMatch(textbox.Text, @"^$|^\d{9}$"))
                 {
                     textbox.Background = new SolidColorBrush(Properties.Settings.Default.NoValidColor);
-                    textbox.ToolTip = "строго 10 цифр";
+                    textbox.ToolTip = "строго 9 цифр";
                     return false;
                 }
                 else

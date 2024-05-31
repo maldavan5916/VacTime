@@ -168,5 +168,10 @@ namespace VacuumCraft
             VacuumInstallations vi = new VacuumInstallations(Convert.ToInt32(dataRowView.Row["VacuumInstallations_id"]));
             priceBox.Text = vi.Price.ToString();
         }
+
+        private void priceBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PrintBtn.IsEnabled = Validation.Price(sender);
+        }
     }
 }

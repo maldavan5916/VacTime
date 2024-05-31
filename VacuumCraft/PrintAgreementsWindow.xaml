@@ -67,7 +67,7 @@
         <TextBox x:Name="orderCreateDateBox" Grid.Row="3" Grid.Column="1" Height="20" VerticalAlignment="Center" IsReadOnly="True"/>
         <TextBox x:Name="orderPathBox" Grid.Row="4" Grid.Column="1" Height="20" VerticalAlignment="Center" IsReadOnly="True"/>
         <DatePicker x:Name="dateConclusionDP" Grid.Row="4" Grid.Column="1" Margin="0,27,0,0" Grid.RowSpan="2"/>
-        <TextBox x:Name="priceBox" Grid.Row="6" Grid.Column="1" Height="20" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox x:Name="priceBox" Grid.Row="6" Grid.Column="1" Height="20" VerticalAlignment="Center" IsReadOnly="True" TextChanged="priceBox_TextChanged"/>
         <TextBox x:Name="ConditionsBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" KeyDown="TextBox_KeyDown" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Margin="5,0,0,0"/>
         <Button Content="Закрыть"  Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsCancel="True" Grid.Row="7"/>
         <Button x:Name="PrintBtn" Content="Печать" Click="PrintBtn_Click" Width="100" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsDefault="True" Grid.Row="7" Grid.Column="2"/>
