@@ -35,6 +35,7 @@ namespace VacuumCraft
             DescriptionBox.Text = Installations.Description;
 
             AcceptBtn.Visibility = Visibility.Hidden;
+            Title = "Изменение вакуумной установки";
         }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
