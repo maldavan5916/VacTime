@@ -129,7 +129,10 @@ namespace VacuumCraft
         private void PrintBtn_Click(object sender, RoutedEventArgs e)
         {
             if (listView2.SelectedItem == null)
+            {
                 MessageBox.Show("Не выбрана заявка", "Ошибка");
+                return;
+            }
             else
                 SaveDocx();
 

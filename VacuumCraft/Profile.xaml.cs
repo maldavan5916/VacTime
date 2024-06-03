@@ -148,7 +148,11 @@ namespace VacuumCraft
 
         private void SaveClick(object sender, EventArgs e)
         {
-
+            if (Array.Exists(ValidTextBoxes, element => element == false))
+            {
+                MessageBox.Show("Не все поля заполнены правильно\n", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.VacTimeDBConnectionString))
             {
                 string query = @"

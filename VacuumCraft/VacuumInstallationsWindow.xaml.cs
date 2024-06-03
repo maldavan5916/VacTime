@@ -10,6 +10,9 @@ using System.Windows.Media.Imaging;
 
 namespace VacuumCraft
 {
+    /// <summary>
+    /// Логика взаимодействия для VacuumInstallationsWindow.xaml
+    /// </summary>
     public partial class VacuumInstallationsWindow : Window
     {
         private bool[] ValidTextBoxes = new bool[4];
