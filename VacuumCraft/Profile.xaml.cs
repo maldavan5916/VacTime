@@ -226,7 +226,7 @@ namespace VacuumCraft
         {
             if (Array.Exists(ValidTextBoxes, element => element == false))
             {
-                MessageBox.Show("Не все поля заполнены правильно\n" + String.Join("; ", ValidTextBoxes), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Не все поля заполнены правильно\n", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (NewPass1.Password != NewPass2.Password)
