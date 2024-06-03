@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -89,6 +90,11 @@ namespace VacuumCraft
         private void AbotProgram(object sender, RoutedEventArgs e)
         {
             new AboutBox1().ShowDialog();
+        }
+
+        private void OpenReadme(object sender, RoutedEventArgs e)
+        {
+            Process.Start("readme.chm");
         }
 
         private void VacuumInstallationsClick(object sender, RoutedEventArgs e)

@@ -22,5 +22,6 @@
             <Button Content="Вход" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="100" Height="30" IsDefault="True" Click="Auth"/>
         </Grid>
         <Button Content="Создать аккаунт" Background="{x:Null}" Width="150" Height="25" BorderBrush="{x:Null}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="CreateAkk"/>
+        <Button Content="Открыть справку" Background="{x:Null}" Width="150" Height="25" BorderBrush="{x:Null}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="OpenReadme"/>
     </Grid>
 </Window>
