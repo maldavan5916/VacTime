@@ -34,6 +34,7 @@
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="О прогрмме" Click="AbotProgram"/>
+                <MenuItem Header="Руководство пользователя" Click="OpenReadme"/>
             </MenuItem>
             <MenuItem Header="Обновить" Click="UpdateCatalog_Click"/>
         </Menu>

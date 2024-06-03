@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
 
@@ -56,6 +57,11 @@ namespace VacuumCraft
         private void CreateAkk(object sender, RoutedEventArgs e)
         {
             new Profile().ShowDialog();
+        }
+
+        private void OpenReadme(object sender, RoutedEventArgs e)
+        {
+            Process.Start("readme.chm");
         }
     }
 }

@@ -184,6 +184,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="readme.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="VacTimeDBDataSet.xsc">
       <DependentUpon>VacTimeDBDataSet.xsd</DependentUpon>
     </None>
